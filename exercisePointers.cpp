@@ -1,3 +1,4 @@
+
 // >> MyC/Pointers
 // by Soliman - UniversityofFlorida
 
@@ -5,19 +6,19 @@
 //In this example, I practice some aritmitic operations using pointers on a table of scores 
 
 #include <iostream>
-#include <iomanip>
+using namespace std;
 
 // Function to safely print array element
 void printElement(int *ptr, int index, int maxIndex) {
     if (!ptr) {
-        std::cout << "Error: Pointer is nullptr!" << std::endl;
+        cout << "Error: Pointer is nullptr!" << endl;
         return;
     }
     
     if (index >= 0 && index < maxIndex) {
-        std::cout << "Element at index " << index << ": " << *(ptr + index) << std::endl;
+        cout << "Element at index " << index << ": " << *(ptr + index) << endl;
     } else {
-        std::cout << "Error: Index " << index << " out of bounds!" << std::endl;
+        cout << "Error: Index " << index << " out of bounds!" << endl;
     }
 }
 
@@ -37,25 +38,25 @@ int* findMin(int *ptr, int size) {
 }
 
 int main() {
-    std::cout << "=== Exercise some pointers concepts on a table of scores ===" << std::endl<< std::endl;
+    cout << "=== Exercise some pointers concepts on a table of scores ===" << endl<< endl;
     
     int scores[] = {85, 92, 78, 95, 88, 76, 91, 89};
     int size = 8;
     
-    std::cout << "The data of the scores table :";
+    cout << "The data of the scores table :";
     for (int i = 0; i < size; i++) {
-        std::cout << scores[i] << " ";
+        cout << scores[i] << " ";
     }
-    std::cout << std::endl;
+    cout << endl;
     
-    std::cout << "\n--- Some operations using pointers ---" << std::endl;
+    cout << "\n--- Some operations using pointers ---" << endl;
 
-    // ===== Find the minimum score  =====
-    std::cout << "The minimum Score is : ";
+    // ===== Find the minimum score and its index using pointer  =====
+    cout << "The minimum Score is : ";
     int *minPtr = findMin(scores, size);
     if (minPtr) {
         int minIndex = minPtr - scores;
-        std::cout << *minPtr << " - "<< "at the index : " << minIndex << std::endl;
+        cout << *minPtr << " - "<< "at the index : " << minIndex << endl;
     }
     
     // ===== Access the score table elements using Pointer =====
@@ -70,21 +71,21 @@ int main() {
         sum += *ptr;
         ptr++;
     }
-    std::cout << "Sum of all scores: " << sum << std::endl;
-    std::cout << "Average score: " << std::fixed << std::setprecision(2) << (double)sum / size << std::endl;
+    cout << "Sum of all scores: " << sum << endl;
+    cout << "Average score: " << (double)sum / size << endl;
     
     // ===== Swapping using pointers =====
-    std::cout << "\n--- Swap using pointers ---" << std::endl;
+    cout << "\n--- Swap using pointers ---" << endl;
     int *ptrA = &scores[0];
     int *ptrB = &scores[7];
     
-    std::cout << "Before swap: scores[0] = " << *ptrA << ", scores[7] = " << *ptrB << std::endl;
+    cout << "Before swap: scores[0] = " << *ptrA << ", scores[7] = " << *ptrB << endl;
     
     int temp = *ptrA;
     *ptrA = *ptrB;
     *ptrB = temp;
     
-    std::cout << "After swap:  scores[0] = " << *ptrA << ", scores[7] = " << *ptrB << std::endl;
+    cout << "After swap:  scores[0] = " << *ptrA << ", scores[7] = " << *ptrB << endl;
     
     return 0;
 }
