@@ -61,13 +61,11 @@ int main() {
     
     // ===== Access the score table elements using Pointer =====
     int *ptr = scores;
-    
-    // ===== Safe pointer arithmetic =====
     int *end = scores + size;
     ptr = scores;
     
     int sum = 0;
-    while (ptr < end) {  // Safe bounds check
+    while (ptr < end) { 
         sum += *ptr;
         ptr++;
     }
@@ -76,16 +74,21 @@ int main() {
     
     // ===== Swapping using pointers =====
     cout << "\n--- Swap using pointers ---" << endl;
-    int *ptrA = &scores[0];
-    int *ptrB = &scores[7];
+    int *ptrA = scores;
+    int *ptrB = scores + size-1;
     
-    cout << "Before swap: scores[0] = " << *ptrA << ", scores[7] = " << *ptrB << endl;
-    
+    cout << "Before swap" << endl;
+    printElement(scores, 0, size);
+    printElement(scores, size-1, size);
+    cout << endl;
+
     int temp = *ptrA;
     *ptrA = *ptrB;
     *ptrB = temp;
     
-    cout << "After swap:  scores[0] = " << *ptrA << ", scores[7] = " << *ptrB << endl;
-    
+    cout << "After swap" << endl;
+    printElement(scores, 0, size);
+    printElement(scores, size-1, size);
+    cout << endl;
     return 0;
 }
