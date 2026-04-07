@@ -1,3 +1,8 @@
+// >> MyC/Pointers
+// by Soliman - UniversityofFlorida
+
+//This is a self implemented excercise covering the topic of pointers in C/C++
+//In this example, I practice some aritmitic operations using pointers on a table of scores 
 
 #include <iostream>
 #include <iomanip>
@@ -16,8 +21,8 @@ void printElement(int *ptr, int index, int maxIndex) {
     }
 }
 
-// Function to safely search in array
-int* safeFindMin(int *ptr, int size) {
+// Function to find min in the array
+int* findMin(int *ptr, int size) {
     if (!ptr || size <= 0) {
         return nullptr;
     }
@@ -32,41 +37,31 @@ int* safeFindMin(int *ptr, int size) {
 }
 
 int main() {
-    std::cout << "=== Advanced Pointer Concepts ===" << std::endl;
+    std::cout << "=== Exercise some pointers concepts on a table of scores ===" << std::endl<< std::endl;
     
     int scores[] = {85, 92, 78, 95, 88, 76, 91, 89};
     int size = 8;
     
-    std::cout << "\n--- Original Array ---" << std::endl;
-    std::cout << "Scores: ";
+    std::cout << "The data of the scores table :";
     for (int i = 0; i < size; i++) {
         std::cout << scores[i] << " ";
     }
     std::cout << std::endl;
     
-    // ===== Find minimum score safely =====
-    std::cout << "\n--- Find Minimum Score ---" << std::endl;
-    int *minPtr = safeFindMin(scores, size);
+    std::cout << "\n--- Some operations using pointers ---" << std::endl;
+
+    // ===== Find the minimum score  =====
+    std::cout << "The minimum Score is : ";
+    int *minPtr = findMin(scores, size);
     if (minPtr) {
         int minIndex = minPtr - scores;
-        std::cout << "Minimum score: " << *minPtr << " at index " << minIndex << std::endl;
+        std::cout << *minPtr << " - "<< "at the index : " << minIndex << std::endl;
     }
     
-    // ===== Safe element access =====
-    std::cout << "\n--- Safe Element Access ---" << std::endl;
-    printElement(scores, 0, size);
-    printElement(scores, 7, size);
-    printElement(scores, 10, size);  // Out of bounds - safely handled
-    
-    // ===== Pointer manipulation =====
-    std::cout << "\n--- Pointer Manipulation ---" << std::endl;
+    // ===== Access the score table elements using Pointer =====
     int *ptr = scores;
-    std::cout << "First element: " << *ptr << std::endl;
-    std::cout << "Third element using ptr[2]: " << ptr[2] << std::endl;
-    std::cout << "Third element using *(ptr+2): " << *(ptr + 2) << std::endl;
     
     // ===== Safe pointer arithmetic =====
-    std::cout << "\n--- Safe Pointer Arithmetic ---" << std::endl;
     int *end = scores + size;
     ptr = scores;
     
@@ -79,7 +74,7 @@ int main() {
     std::cout << "Average score: " << std::fixed << std::setprecision(2) << (double)sum / size << std::endl;
     
     // ===== Swapping using pointers =====
-    std::cout << "\n--- Swap Using Pointers ---" << std::endl;
+    std::cout << "\n--- Swap using pointers ---" << std::endl;
     int *ptrA = &scores[0];
     int *ptrB = &scores[7];
     
@@ -90,24 +85,6 @@ int main() {
     *ptrB = temp;
     
     std::cout << "After swap:  scores[0] = " << *ptrA << ", scores[7] = " << *ptrB << std::endl;
-    
-    // ===== Complex pointer scenarios =====
-    std::cout << "\n--- Complex Scenarios ---" << std::endl;
-    
-    // Check if two pointers point to same element
-    int *ptr1 = &scores[3];
-    int *ptr2 = scores + 3;
-    std::cout << "ptr1 == ptr2: " << (ptr1 == ptr2 ? "true (same element)" : "false") << std::endl;
-    
-    // Check pointer order
-    ptr1 = &scores[2];
-    ptr2 = &scores[5];
-    if (ptr1 < ptr2) {
-        std::cout << "ptr1 points to an earlier element than ptr2" << std::endl;
-    }
-    
-    // Count difference
-    std::cout << "Distance between ptr1 and ptr2: " << (ptr2 - ptr1) << " elements" << std::endl;
     
     return 0;
 }
