@@ -40,6 +40,17 @@ static void toggle(int led_number) {
   }
 }
 
+static void write_all(uint8_t value) {
+  GPIO_OUT = value;
+  printf("LED value is %x \n", value);
+}
+
+static void display(int led_number) {
+  int index = led_number-1;
+  printf("LED %d value is %s \n",index, (GPIO_OUT)? "ON" : "OFF");
+
+}
+
 int main () {
   int led_number;
   int command;
@@ -93,12 +104,14 @@ int main () {
         toggle(led_number);
         break;
       case 4 :
+        printf("change all LEDs\n");
+        write_all(0xFF);
         break;
       case 5 :
+        printf("Display LED status\n");
+        display(led_number);
         break;
       default : break;
     }
-    
-    break;
   }
 }
