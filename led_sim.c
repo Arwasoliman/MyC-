@@ -63,9 +63,9 @@ int main () {
         break;
     }
 
-    if (command == 0) {
-            printf("Exiting simulator.\n");
-            break;
+    if (command < 0 || command > 4) {
+      printf("Invalid command.\n");
+      continue;
     }
     
     printf("Enter LED number (1-%d): ", NUM_LEDS);
@@ -76,8 +76,8 @@ int main () {
     }
     
     if (led_number < 1 || led_number > NUM_LEDS) {
-            printf("Invalid LED number.\n");
-            continue;
+      printf("Invalid LED number.\n");
+      continue;
     }
 
     switch (command) {
