@@ -59,8 +59,7 @@ int main () {
     printf("1. Turn LED ON\n");
     printf("2. Turn LED OFF\n");
     printf("3. Toggle LED\n");
-    printf("4. Write ALL LEDs\n");
-    printf("5. Display LED status\n");
+    printf("4. Display LED status\n");
     printf("0. Exit\n");
     
     printf("Enter command: ");
