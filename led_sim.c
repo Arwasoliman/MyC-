@@ -40,11 +40,6 @@ static void toggle(int led_number) {
   }
 }
 
-static void write_all(uint8_t value) {
-  GPIO_OUT = value;
-  printf("LED value is %x \n", value);
-}
-
 static void display(int led_number) {
   int index = led_number-1;
   printf("LED %d value is %s \n",led_number, (GPIO_OUT & (1 << index)) >> index? "ON" : "OFF");
