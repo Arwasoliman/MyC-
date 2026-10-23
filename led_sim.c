@@ -46,7 +46,8 @@ static void write_all(uint8_t value) {
 }
 
 static void display(int led_number) {
-  printf("LED %d value is %s \n",led_number, (GPIO_OUT)? "ON" : "OFF");
+  int index = led_number-1;
+  printf("LED %d value is %s \n",led_number, (GPIO_OUT & (1 << index)) >> index? "ON" : "OFF");
 }
 
 int main () {
