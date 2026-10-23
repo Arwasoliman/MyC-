@@ -13,53 +13,92 @@
 
 static volatile uint8_t GPIO_OUT = 0x00;
 
-static void led_set(int index)
-{
+static void set(int led_number) {
+  int index = led_number-1;
   if ( index >= 0 && index < NUM_LEDS)
   {
     GPIO_OUT |= (uint8_t)(1<<index);
-    printf("LED %d is ON \n", index);
+    printf("LED %d is ON \n", led_number);
   }
 }
 
-static void led_clear(int index)
-{
+static void clear(int led_number) {
+  int index = led_number-1;
   if ( index >= 0 && index < NUM_LEDS)
   {
     GPIO_OUT &= (uint8_t)~(1<<index);
-    printf("LED %d is OFF \n", index);
+    printf("LED %d is OFF \n", led_number);
   }
 }
 
-static void led_toggle(int index)
-{
+static void toggle(int led_number) {
+  int index = led_number-1;
   if ( index >= 0 && index < NUM_LEDS)
   {
     GPIO_OUT ^= (uint8_t)(1<<index);
-    printf("LED %d toggled \n", index);
+    printf("LED %d toggled \n", led_number);
   }
 }
 
 int main () {
-  int led_index;
+  int led_number;
+  int command;
   
   while (1) {
     printf("\n=== LED Control Simulator ===\n");
+    printf("1. Turn LED ON\n");
+    printf("2. Turn LED OFF\n");
+    printf("3. Toggle LED\n");
+    printf("4. Write ALL LEDs\n");
+    printf("5. Display LED status\n");
+    printf("0. Exit\n");
+    
+    printf("Enter command: ");
+    if (scanf("%d", &command) != 1) {
+        printf("Invalid input. Exiting.\n");
+        break;
+    }
 
+    if (command == 0) {
+            printf("Exiting simulator.\n");
+            break;
+    }
+    
     printf("Enter LED number (1-%d): ", NUM_LEDS);
-    if(scanf("%d", &led_index) != 1)
+    if(scanf("%d", &led_number) != 1)
     {
       printf("Invalid input. Exiting.\n");
       break;
     }
     
-    printf("Turn LED ON\n");
-    led_set(led_index);
-    printf("Turn LED OFF\n");
-    led_clear(led_index);
-    printf("Toggle LED\n");
-    led_toggle(led_index);
+    if (led_number < 1 || led_number > NUM_LEDS) {
+            printf("Invalid LED number.\n");
+            continue;
+    }
 
+    switch (command) {
+      case 0 : 
+        printf("Exiting simulator.\n");
+        break;
+      case 1 :
+        printf("Turn LED ON\n");
+        set(led_number);
+        break;
+      case 2 :
+        printf("Turn LED OFF\n");
+        clear(led_number);
+        break;
+      case 3 :
+        printf("Toggle LED\n");
+        toggle(led_number);
+        break;
+      case 4 :
+        break;
+      case 5 :
+        break;
+      default : break;
+    }
+    
     break;
   }
 }
