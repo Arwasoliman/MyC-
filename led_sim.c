@@ -103,10 +103,6 @@ int main () {
         toggle(led_number);
         break;
       case 4 :
-        printf("change all LEDs\n");
-        write_all(0xFF);
-        break;
-      case 5 :
         printf("Display LED status\n");
         display(led_number);
         break;
