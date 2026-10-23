@@ -63,7 +63,12 @@ int main () {
         break;
     }
 
-    if (command < 0 || command > 4) {
+    if (command == 0) {
+      printf("Exiting simulator.\n");
+      break;
+    }
+
+    if (command < 1 || command > 4) {
       printf("Invalid command.\n");
       continue;
     }
@@ -81,9 +86,6 @@ int main () {
     }
 
     switch (command) {
-      case 0 : 
-        printf("Exiting simulator.\n");
-        break;
       case 1 :
         printf("Turn LED ON\n");
         set(led_number);
